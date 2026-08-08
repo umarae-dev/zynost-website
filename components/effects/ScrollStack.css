@@ -1,0 +1,36 @@
+/* Adapted for useWindowScroll={true} usage: the section scrolls with the
+   normal page (driven by Lenis in window mode), not as its own nested
+   scroll box — a boxed mini-scroller reads as janky on a marketing page
+   (two competing scrollbars). The canonical component's boxed-scroll CSS
+   is intentionally not used here. */
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-stack-inner {
+  padding: 8vh 0 32rem;
+  min-height: 100vh;
+}
+
+@media (min-width: 640px) {
+  .scroll-stack-inner {
+    padding-bottom: 40rem;
+  }
+}
+
+.scroll-stack-card {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  transform-origin: top center;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.scroll-stack-end {
+  width: 100%;
+  height: 1px;
+}

@@ -1,26 +1,301 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   Zynost design tokens — matches the production app exactly
+   (see goro_app/lib/screens/trade_dashboard.dart's palette)
+   ============================================================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-space-grotesk);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Zynost brand tokens, exposed as Tailwind utilities:
+     bg-violet, text-sky, border-bullish, etc. */
+  --color-violet: #8b5cf6;
+  --color-violet-dim: #7c3aed;
+  --color-sky: #38bdf8;
+  --color-bullish: #22c55e;
+  --color-bearish: #ef4444;
+  --color-warn: #f59e0b;
+  --color-ink: #0b0b14;
+  --color-surface: #14141f;
+  --color-surface-2: #1a1a2a;
+  --color-hairline: #26263a;
+  --color-ink-light: #f5f6fa;
+  --color-surface-light: #ffffff;
+  --color-hairline-light: #e3e5ec;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #0b0b14;
+  --foreground: #ffffff;
+  --card: #14141f;
+  --card-foreground: #ffffff;
+  --popover: #14141f;
+  --popover-foreground: #ffffff;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1a2a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a2a;
+  --muted-foreground: #9ca3af;
+  --accent: #1a1a2a;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #26263a;
+  --input: #26263a;
+  --ring: #8b5cf6;
+  --chart-1: #8b5cf6;
+  --chart-2: #38bdf8;
+  --chart-3: #22c55e;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --radius: 0.75rem;
+  --sidebar: #0b0b14;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1a2a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #26263a;
+  --sidebar-ring: #8b5cf6;
+}
+
+/* Light mode — used on the landing hero's light variant + legal pages
+   if the visitor's system prefers light; app is dark-first though. */
+.light {
+  --background: #f5f6fa;
+  --foreground: #12131a;
+  --card: #ffffff;
+  --card-foreground: #12131a;
+  --popover: #ffffff;
+  --popover-foreground: #12131a;
+  --primary: #7c3aed;
+  --primary-foreground: #ffffff;
+  --secondary: #eef0f6;
+  --secondary-foreground: #12131a;
+  --muted: #eef0f6;
+  --muted-foreground: #6b7280;
+  --accent: #eef0f6;
+  --accent-foreground: #12131a;
+  --destructive: #dc2626;
+  --border: #e3e5ec;
+  --input: #e3e5ec;
+  --ring: #7c3aed;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #12131a;
+  --sidebar-primary: #7c3aed;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eef0f6;
+  --sidebar-accent-foreground: #12131a;
+  --sidebar-border: #e3e5ec;
+  --sidebar-ring: #7c3aed;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+    color-scheme: dark;
+  }
+  h1, h2, h3 {
+    @apply font-heading;
+  }
+  .light html,
+  html.light {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 10%, rgba(56, 189, 248, 0.08), transparent);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background-color: rgba(139, 92, 246, 0.35);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
 }
+
+@keyframes float-y {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4), 0 0 24px 0 rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.7), 0 0 40px 4px rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* "Smoke" hover effect (FeatureReveal cards) - two blurred glows drifting
+   on independent, slightly-offset loops so they never fully sync up,
+   reading as a soft, slowly shifting haze rather than a single pulsing
+   blob. */
+@keyframes smoke-drift-1 {
+  0% { transform: translate(-8%, -6%) scale(1); }
+  50% { transform: translate(10%, 8%) scale(1.15); }
+  100% { transform: translate(-8%, -6%) scale(1); }
+}
+@keyframes smoke-drift-2 {
+  0% { transform: translate(6%, 10%) scale(1.1); }
+  50% { transform: translate(-10%, -4%) scale(0.95); }
+  100% { transform: translate(6%, 10%) scale(1.1); }
+}
+.animate-smoke-drift-1 {
+  animation: smoke-drift-1 7s ease-in-out infinite;
+}
+.animate-smoke-drift-2 {
+  animation: smoke-drift-2 9s ease-in-out infinite;
+}
+
+/* Mobile fallback for FeatureReveal — a single cheap fade-in instead of
+   the GSAP scroll-pin used on desktop. */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+/* Hero headline's single rotating word — the one deliberate exception to
+   "no animation outside hover": cheap CSS crossfade, no JS animation
+   library, triggered by a plain setInterval word swap. */
+@keyframes word-swap {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-word-swap {
+  animation: word-swap 0.45s ease-out both;
+}
+
+@layer utilities {
+  .font-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .hairline {
+    border: 1px solid var(--border);
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .animate-breathe {
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Thin violet scrollbar, desktop only */
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+    border: 2px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-violet-dim);
+  }
+}
+
+/* Lenis smooth-scroll requirement */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Real bug fix: this used to force every CSS animation/transition
+   site-wide to 0.01ms via !important whenever prefers-reduced-motion
+   matched — that's the correct default for ambient/decorative motion in
+   general, but it also silently neutered explicitly-requested interactive
+   effects (GooeyNav's click particle burst, the nav dropdown's fade,
+   the mobile menu's fade) with no visible error. Same root cause as the
+   earlier SplashCursor/MoltenMetal fix: Windows' "Animation effects"
+   setting off reports prefers-reduced-motion: reduce, and every one of
+   these was an explicit, repeated request the user wants visible on
+   their own machine regardless of that system flag. */

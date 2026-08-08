@@ -1,0 +1,36 @@
+/* Adapted from React Bits' CardSwap — the canonical CSS anchors the
+   container to a viewport corner (bottom-right, for a hero decoration);
+   here it's a normal in-flow section element instead, so it's just
+   centered and sized to its own width/height props. */
+.card-swap-container {
+  position: relative;
+  margin: 0 auto;
+  perspective: 900px;
+  overflow: visible;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 1rem;
+  border: 1px solid var(--border, #26263a);
+  background: var(--card, #14141f);
+
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .card-swap-container {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .card-swap-container {
+    transform: scale(0.6);
+  }
+}
