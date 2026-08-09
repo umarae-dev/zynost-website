@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Bot, Workflow, Tag, Info, ChevronDown, ArrowUpRight, Menu, X } from "lucide-react";
-import { NodeNetwork } from "@/components/shared/NodeNetwork";
 import { MagneticButton } from "@/components/shared/MagneticButton";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import PillNav from "@/components/effects/PillNav";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -100,9 +100,13 @@ export function Navbar() {
         )}
       >
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
-          <div className="transition-transform duration-300 group-hover:scale-90">
-            <NodeNetwork size={28} satellites={5} variant="compact" />
-          </div>
+          <img
+            src="/zynost-logo.png"
+            alt={`${SITE.name} logo`}
+            width={40}
+            height={40}
+            className="h-10 w-10 shrink-0 transition-transform duration-300 group-hover:scale-90"
+          />
           <span className="text-base font-semibold tracking-tight">{SITE.name}</span>
         </Link>
 
@@ -155,6 +159,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-2 lg:flex">
+          <ThemeToggle />
           <a
             href={`${SITE.appUrl}`}
             className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
@@ -202,14 +207,17 @@ export function Navbar() {
             >
               {SITE.name}
             </Link>
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close menu"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/[0.03] text-foreground"
-            >
-              <X size={19} />
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/[0.03] text-foreground"
+              >
+                <X size={19} />
+              </button>
+            </div>
           </div>
 
           <div className="relative flex-1 overflow-y-auto px-6 pb-8 pt-4">

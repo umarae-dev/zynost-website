@@ -129,6 +129,10 @@ export interface MoltenMetalProps {
   mouseStrength?: number;
   opacity?: number;
   className?: string;
+  /** Called once if WebGL2 context/shader setup throws, so the mounting
+   * component can swap in a static fallback instead of silently showing
+   * nothing — see the try/catch below. */
+  onError?: () => void;
 }
 
 /** Ported from React Bits' MoltenMetal (JS-CSS variant) — a WebGL2 caustic
@@ -156,6 +160,7 @@ export default function MoltenMetal({
   mouseStrength = 0.3,
   opacity = 1.0,
   className = "",
+  onError,
 }: MoltenMetalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -304,6 +309,7 @@ export default function MoltenMetal({
     };
     } catch (err) {
       console.error("MoltenMetal: WebGL2 setup failed, rendering nothing.", err);
+      onError?.();
       return undefined;
     }
   }, []);

@@ -12,6 +12,7 @@ const MoltenMetal = dynamic(() => import("./MoltenMetal"), { ssr: false });
  * enough for phones (see MoltenMetal usage below). */
 export function HeroBackground() {
   const [enabled, setEnabled] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const probe = document.createElement("canvas");
@@ -19,7 +20,25 @@ export function HeroBackground() {
     setEnabled(hasWebGL2);
   }, []);
 
-  if (!enabled) return null;
+  // No WebGL2 (common on mobile: battery-saver mode, older Safari, in-app
+  // browser webviews, GPU driver blocklisting) or the shader itself failed
+  // to compile/link at runtime — either way, a still gradient in the same
+  // palette beats an empty hero, which is what mobile visitors were seeing
+  // before this fallback existed.
+  if (!enabled || failed) {
+    return (
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-16 inset-x-0 bottom-0"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 50% 15%, rgba(139,92,246,0.35), transparent 60%), " +
+            "radial-gradient(90% 70% at 80% 60%, rgba(125,211,252,0.22), transparent 65%), " +
+            "#0a0714",
+        }}
+      />
+    );
+  }
 
   // Real bug fix #1: stacked a CSS opacity-60 wrapper ON TOP OF the
   // shader's own opacity={0.85} internal alpha (multiplying down to
@@ -60,6 +79,7 @@ export function HeroBackground() {
         mouseInteraction
         mouseStrength={0.2}
         opacity={1}
+        onError={() => setFailed(true)}
       />
     </div>
   );

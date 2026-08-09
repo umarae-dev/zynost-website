@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Send } from "lucide-react";
-import { NodeNetwork } from "@/components/shared/NodeNetwork";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SubscribeForm } from "@/components/shared/SubscribeForm";
 import { XLogo, GitHubLogo, DiscordLogo, YouTubeLogo } from "@/components/shared/SocialIcons";
 import { SITE } from "@/lib/constants";
@@ -75,9 +75,13 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
-              <div className="transition-transform duration-200 group-hover:scale-105">
-                <NodeNetwork size={28} satellites={5} variant="compact" />
-              </div>
+              <img
+                src="/zynost-logo.png"
+                alt={`${SITE.name} logo`}
+                width={36}
+                height={36}
+                className="h-9 w-9 shrink-0 transition-transform duration-200 group-hover:scale-105"
+              />
               <span className="text-base font-semibold tracking-tight">{SITE.name}</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
@@ -130,6 +134,7 @@ export function Footer() {
             Not financial advice. You still make the final call on if, when, and how much to
             trade — Zynost presents evidence, never an instruction.
           </p>
+          <ThemeToggle className="shrink-0" />
         </div>
       </div>
     </footer>

@@ -262,6 +262,14 @@ export function ScrollStack({
     };
     window.addEventListener("resize", onResize);
 
+    // Mobile browsers resize the visual viewport (address bar collapsing/
+    // expanding mid-scroll) without reliably firing a plain `resize` event —
+    // that let cached offsets/window.innerHeight go stale mid-scroll on
+    // phones specifically, which is what made this effect feel broken there
+    // even though the underlying scroll-position math is identical to desktop.
+    const visualViewport = window.visualViewport;
+    visualViewport?.addEventListener("resize", onResize);
+
     // Cards' images may finish loading after this first measure and shift
     // layout height — re-measure once they have.
     const images = scroller.querySelectorAll("img");
@@ -306,6 +314,7 @@ export function ScrollStack({
       runningRef.current = false;
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       window.removeEventListener("resize", onResize);
+      visualViewport?.removeEventListener("resize", onResize);
       images.forEach((img) => img.removeEventListener("load", onImgLoad));
       observer.disconnect();
       cancelAnimationFrame(resizeRaf);
