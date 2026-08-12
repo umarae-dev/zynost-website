@@ -163,6 +163,11 @@ export default function MoltenMetal({
   onError,
 }: MoltenMetalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const onErrorRef = useRef(onError);
+
+  useEffect(() => {
+    onErrorRef.current = onError;
+  }, [onError]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -280,7 +285,8 @@ export default function MoltenMetal({
     const io = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        isVisible ? tryStart() : tryStop();
+        if (isVisible) tryStart();
+        else tryStop();
       },
       { threshold: 0 }
     );
@@ -288,7 +294,8 @@ export default function MoltenMetal({
 
     const onVisibility = () => {
       isPageVisible = !document.hidden;
-      isPageVisible ? tryStart() : tryStop();
+      if (isPageVisible) tryStart();
+      else tryStop();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -309,7 +316,7 @@ export default function MoltenMetal({
     };
     } catch (err) {
       console.error("MoltenMetal: WebGL2 setup failed, rendering nothing.", err);
-      onError?.();
+      onErrorRef.current?.();
       return undefined;
     }
   }, []);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import "./PillNav.css";
@@ -82,7 +82,6 @@ export default function PillNav({ items, activeHref, className = "", ease = "pow
     window.addEventListener("resize", onResize);
     if (document.fonts?.ready) document.fonts.ready.then(layout).catch(() => {});
     return () => window.removeEventListener("resize", onResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, ease, activeHref]);
 
   const handleEnter = (i: number) => {

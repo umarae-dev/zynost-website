@@ -55,14 +55,7 @@ export function FinalCTA() {
   return (
     <section className="relative w-full overflow-hidden border-t border-border bg-[#020204] py-32 sm:py-48">
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1600&q=60&auto=format&fit=crop"
-          alt=""
-          aria-hidden
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 bg-[#020204]/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(139,92,246,0.18),transparent_32%),radial-gradient(circle_at_70%_60%,rgba(56,189,248,0.10),transparent_28%),linear-gradient(#020204,#07040e,#020204)]" />
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-900/20 blur-[120px]" />
         <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-900/20 blur-[100px]" />
       </div>
@@ -80,8 +73,8 @@ export function FinalCTA() {
         </h2>
 
         <p className="mx-auto mt-8 max-w-xl text-lg font-medium text-gray-400 sm:text-xl">
-          18 agents. Thousands of data points. <br className="hidden sm:block" />
-          <strong className="text-white">One clear decision.</strong>
+          Live data. Specialist research. Adversarial review. <br className="hidden sm:block" />
+          <strong className="text-white">One decision you can inspect.</strong>
         </p>
 
         <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row">

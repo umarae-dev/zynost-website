@@ -15,9 +15,12 @@ export function HeroBackground() {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    const probe = document.createElement("canvas");
-    const hasWebGL2 = !!probe.getContext("webgl2");
-    setEnabled(hasWebGL2);
+    const frame = requestAnimationFrame(() => {
+      const probe = document.createElement("canvas");
+      const hasWebGL2 = !!probe.getContext("webgl2");
+      setEnabled(hasWebGL2);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // No WebGL2 (common on mobile: battery-saver mode, older Safari, in-app

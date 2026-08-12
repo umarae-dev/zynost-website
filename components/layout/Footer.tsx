@@ -1,26 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Send } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SubscribeForm } from "@/components/shared/SubscribeForm";
-import { XLogo, GitHubLogo, DiscordLogo, YouTubeLogo } from "@/components/shared/SocialIcons";
+import { XLogo } from "@/components/shared/SocialIcons";
 import { SITE } from "@/lib/constants";
 
-// Placeholder hrefs — real profile URLs to be swapped in later.
 const SOCIALS = [
   { label: "X (Twitter)", href: `https://x.com/${SITE.twitter.replace("@", "")}`, Icon: XLogo },
-  { label: "Discord", href: "#", Icon: DiscordLogo },
-  { label: "Telegram", href: "#", Icon: Send },
-  { label: "YouTube", href: "#", Icon: YouTubeLogo },
-  { label: "GitHub", href: "#", Icon: GitHubLogo },
 ];
 
 const FOOTER_COLUMNS = [
   {
     heading: "Product",
     links: [
-      { label: "Features", href: "/#agents" },
+      { label: "Product tour", href: "/#product" },
+      { label: "How it works", href: "/#workflow" },
       { label: "System Planned Trade", href: "/#system-planned-trade" },
       { label: "Pricing", href: "/pricing" },
     ],
@@ -75,7 +72,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
-              <img
+              <Image
                 src="/zynost-logo.png"
                 alt={`${SITE.name} logo`}
                 width={36}
@@ -85,21 +82,20 @@ export function Footer() {
               <span className="text-base font-semibold tracking-tight">{SITE.name}</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              {SITE.tagline} 18 AI agents, one clear, backtested decision.
+              {SITE.tagline} Live data, specialist research, adversarial review, and one inspectable decision.
             </p>
             <div className="mt-5 flex items-center gap-3">
               {SOCIALS.map(({ label, href, Icon }) => (
                 <a
                   key={label}
                   href={href}
-                  onClick={href === "#" ? (e) => e.preventDefault() : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-violet hover:text-violet hover:shadow-[0_0_20px_-4px_rgba(139,92,246,0.5)]"
                 >
-                  <Icon size={16} strokeWidth={2} />
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>

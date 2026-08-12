@@ -8,13 +8,7 @@ import { SITE } from "@/lib/constants";
 export function SkepticJudge() {
   return (
     <section className="relative overflow-hidden border-y border-border bg-surface/40 py-28">
-      <img
-        src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=60&auto=format&fit=crop"
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.05] grayscale"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_55%,rgba(139,92,246,0.09),transparent_55%)]" />
       <div className="relative mx-auto max-w-7xl px-6">
         <Reveal className="max-w-2xl">
           <span className="text-xs font-semibold uppercase tracking-wider text-violet">
@@ -24,8 +18,8 @@ export function SkepticJudge() {
             We argue with ourselves before we tell you anything.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            One agent actively hunts for holes in the bullish case. Another weighs everything
-            and delivers a single, reasoned verdict. Radical honesty, built in.
+            One agent actively hunts for holes in the emerging consensus. Another weighs the
+            verified evidence and writes a balanced bull case, bear case, and risk summary.
           </p>
         </Reveal>
 
@@ -92,12 +86,12 @@ export function SkepticJudge() {
           <div className="rounded-2xl border-2 border-violet/40 bg-card p-6 text-center shadow-xl shadow-violet/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_50px_-20px_rgba(139,92,246,0.55)]">
             <div className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-violet">
               <Gavel size={14} />
-              Judge Verdict
+              Illustrative Judge Verdict
             </div>
-            <div className="mt-2 text-3xl font-bold text-bullish">BUY</div>
+            <div className="mt-2 text-3xl font-bold text-bullish">BULLISH LEAN</div>
             <div className="mt-1 text-xs text-muted-foreground">Confidence: 78%</div>
             <p className="mt-3 text-sm text-muted-foreground">
-              Bull case outweighs risks, but manage position size carefully.
+              Evidence leans bullish, but the risk summary stays visible and you make the final call.
             </p>
             <a
               href={SITE.appUrl}

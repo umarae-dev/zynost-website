@@ -1,14 +1,35 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // Save the 4 dashboard screenshots into zynost-website/public/hero/ using
 // exactly these filenames and they'll show up here automatically.
 const IMAGES = [
-  { src: "/hero/dashboard-1.png", eyebrow: "Order Book Radar", headline: "Real resting orders, tracked live." },
-  { src: "/hero/dashboard-2.png", eyebrow: "Persistence Score", headline: "Spoofing filtered out automatically." },
-  { src: "/hero/dashboard-3.png", eyebrow: "Pro Agent Signals", headline: "10 agents, one consensus score." },
-  { src: "/hero/dashboard-4.png", eyebrow: "Market Radar", headline: "The full chart, live, in one view." },
+  {
+    src: "/hero/dashboard-1.png",
+    alt: "Zynost research workspace with live chart, market data, Skeptic check, and consensus",
+    eyebrow: "Research Workspace",
+    headline: "Live market context beside the decision.",
+  },
+  {
+    src: "/hero/dashboard-2.png",
+    alt: "Zynost agent evidence list showing individual signals, summaries, and confidence",
+    eyebrow: "Agent Evidence",
+    headline: "Every specialist opinion stays inspectable.",
+  },
+  {
+    src: "/hero/dashboard-3.png",
+    alt: "Zynost Order Book Radar overview across multiple crypto markets",
+    eyebrow: "Order Book Radar",
+    headline: "Resting liquidity tracked across exchanges.",
+  },
+  {
+    src: "/hero/dashboard-4.png",
+    alt: "Zynost Bitcoin order-book persistence history and exchange breakdown",
+    eyebrow: "Persistence Score",
+    headline: "One-frame walls and spoofing noise filtered out.",
+  },
 ];
 
 const ROTATE_INTERVAL_MS = 3000;
@@ -23,16 +44,27 @@ const ROTATE_INTERVAL_MS = 3000;
  * instead of sitting empty. */
 export function ImageRotatorBox({ className = "" }: { className?: string }) {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reduceMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   useEffect(() => {
+    if (paused || reduceMotion) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % IMAGES.length), ROTATE_INTERVAL_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [paused, reduceMotion]);
 
   const current = IMAGES[index];
 
   return (
-    <div className={`rounded-[1.75rem] bg-gradient-to-br from-violet/60 via-sky/40 to-violet/60 p-[1.5px] shadow-2xl shadow-violet/20 ${className}`}>
+    <div
+      className={`rounded-[1.75rem] bg-gradient-to-br from-violet/60 via-sky/40 to-violet/60 p-[1.5px] shadow-2xl shadow-violet/20 ${className}`}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       <div className="flex h-full w-full flex-col overflow-hidden rounded-[1.7rem] border border-white/5 bg-[#0a0a12]">
         {/* Fake browser-window chrome */}
         <div className="flex shrink-0 items-center gap-2 border-b border-white/5 bg-white/[0.02] px-4 py-2.5">
@@ -56,11 +88,12 @@ export function ImageRotatorBox({ className = "" }: { className?: string }) {
                 className="absolute inset-0 transition-transform duration-[700ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
                 style={{ transform: `translateX(${offset * 100}%)` }}
               >
-                <img
+                <Image
                   src={img.src}
-                  alt=""
-                  aria-hidden
-                  loading={i === 0 ? "eager" : "lazy"}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={i === 0}
                   onError={(e) => {
                     e.currentTarget.style.display = "none";
                   }}
@@ -89,6 +122,21 @@ export function ImageRotatorBox({ className = "" }: { className?: string }) {
             <h4 className="font-heading mt-2 text-balance text-base font-bold leading-tight text-white sm:text-lg">
               {current.headline}
             </h4>
+            <div className="mt-3 flex items-center gap-2" role="tablist" aria-label="Product screenshots">
+              {IMAGES.map((image, imageIndex) => (
+                <button
+                  key={image.src}
+                  type="button"
+                  role="tab"
+                  aria-selected={imageIndex === index}
+                  aria-label={`Show ${image.eyebrow}`}
+                  onClick={() => setIndex(imageIndex)}
+                  className={`h-1.5 rounded-full transition-[width,background-color] ${
+                    imageIndex === index ? "w-7 bg-white" : "w-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -2,15 +2,15 @@ export const SITE = {
   name: "Zynost",
   tagline: "Decision Intelligence, Not Signals.",
   description:
-    "18 specialist AI agents analyze any coin from every angle and hand you one clear verdict — buy, sell, or wait — with real reasoning and backtested evidence, not another guess.",
+    "Zynost combines an 18-agent crypto intelligence system with live market data, a Skeptic review, a final Judge verdict, and structured trade planning — so every decision comes with evidence, risks, and clear next steps.",
   url: "https://zynost.com",
   appUrl: "https://app.zynost.com",
   twitter: "@zynost",
 };
 
 export const NAV_LINKS = [
-  { label: "Product", href: "/#agents" },
-  { label: "How it works", href: "/#system-planned-trade" },
+  { label: "Product", href: "/#product" },
+  { label: "How it works", href: "/#workflow" },
   { label: "Pricing", href: "/pricing" },
   { label: "About Us", href: "/about" },
 ];
@@ -49,10 +49,10 @@ export const AGENTS: Agent[] = [
 ];
 
 export const STATS = [
-  { value: 18, suffix: "", label: "AI Agents" },
-  { value: 8098, suffix: "", label: "Coins Tracked" },
-  { value: 14, suffix: "", label: "Exchanges Merged" },
-  { value: 45, suffix: "%", label: "Backtested Win Rate" },
+  { value: 18, suffix: "", label: "Specialist AI agents" },
+  { value: 14, suffix: "", label: "Exchanges checked" },
+  { value: 8098, suffix: "", label: "Coin catalog" },
+  { value: 3, suffix: "", label: "Free analyses" },
 ];
 
 export const EXCHANGES = [
@@ -79,7 +79,7 @@ export const PRICING_TIERS: PricingTier[] = [
     description: "3 full analyses, forever — no card, no crypto, no trial.",
     features: [
       "3 full analyses — lifetime",
-      "11-agent analysis + Judge/Skeptic verdict",
+      "18-agent intelligence system",
       "Trade Plan, Portfolio, Coach & Psychology agents",
       "Real-time price & market data",
       "Watchlist, alerts, portfolio tracking",
@@ -92,7 +92,7 @@ export const PRICING_TIERS: PricingTier[] = [
     features: [
       "250 analyses / month",
       "8 analyses / day cap",
-      "11-agent analysis + Judge/Skeptic verdict",
+      "18-agent intelligence system",
       "System Planned Trade — auto-picked trades",
       "Early Activity alerts",
       "Everything in Free",
@@ -106,7 +106,7 @@ export const PRICING_TIERS: PricingTier[] = [
     features: [
       "350 analyses / month",
       "12 analyses / day cap",
-      "11-agent analysis + Judge/Skeptic verdict",
+      "18-agent intelligence system",
       "System Planned Trade — auto-picked trades",
       "Early Activity alerts",
       "Everything in Pro",
@@ -117,19 +117,19 @@ export const PRICING_TIERS: PricingTier[] = [
 export const FAQS = [
   {
     q: "What makes Zynost different from signal groups?",
-    a: "Signal groups sell conviction with no evidence. Zynost's every setup is backtested against real historical data with a published win rate and average return, and a dedicated Skeptic agent actively argues against the bullish case before you ever see a verdict.",
+    a: "Signal groups usually give you a call without an auditable reasoning chain. Zynost keeps each specialist's evidence visible, runs a dedicated Skeptic against the consensus, and separates historically backtested setups from newer signals that are still being forward-tracked.",
   },
   {
     q: "How does System Planned Trade work?",
-    a: "Every 10 minutes, Zynost scans real coins across 14 merged CEX exchanges plus on-chain DEX activity for unusual, confirmed volume — not just price movement. Anything that clears the bar gets the exact same real ATR and support/resistance math as a manual analysis, automatically.",
+    a: "Every 10 minutes, Zynost ranks live movers across 14 supported exchanges and on-chain DEX activity. Confirmed candidates must clear liquidity and relative-volume checks before the same ATR and support/resistance planning engine used for manual trade plans builds a setup.",
   },
   {
     q: "Is the backtest data real?",
-    a: "Yes — every published number (win rate, average R, sample size) comes from walking real historical daily candles across a fixed universe of liquid coins, reproduced across repeat runs for stability. It's published, not just claimed.",
+    a: "The published 45% win rate and +0.13R average apply specifically to the Confirmed System Planned Trade configuration: 180 days, a fixed 45-coin universe, and 201 resolved historical picks at a 2.0x RVOL gate and 1.5R target. Emerging, DEX, and order-book signals are labeled separately and forward-tracked instead of borrowing that claim.",
   },
   {
     q: "Can I use Zynost on mobile?",
-    a: "Yes, Zynost is fully responsive and works on any device's browser — desktop, tablet, or phone.",
+    a: "Yes. The workspace is responsive and works in desktop, tablet, and phone browsers. Mobile uses touch-first navigation and reorganized panels rather than a squeezed desktop layout.",
   },
   {
     q: "Do you offer refunds?",

@@ -1,100 +1,103 @@
-"use client";
+import { AlertTriangle, CheckCircle2, FlaskConical, TrendingUp } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Reveal } from "@/components/shared/Reveal";
-
-const ZONES = [
-  { zone: "Breakout Continuation", winRate: 45, avgR: "+0.13R", n: 328, expectancy: "+0.06R" },
-  { zone: "Pullback to Support", winRate: 51, avgR: "+0.21R", n: 412, expectancy: "+0.11R" },
-  { zone: "Range Reversal", winRate: 38, avgR: "+0.09R", n: 201, expectancy: "+0.04R" },
+const RESULT = [
+  { value: "45%", label: "Win rate" },
+  { value: "+0.13R", label: "Average realized R" },
+  { value: "201", label: "Resolved picks" },
+  { value: "180d", label: "Historical window" },
 ];
 
-const HISTOGRAM = [4, 7, 12, 22, 34, 40, 30, 20, 11, 6, 3];
+const METHOD = [
+  "Fixed universe of 45 established, liquid coins",
+  "Real daily OHLCV replayed without future leakage",
+  "Top three qualifying candidates selected per day",
+  "2.0x relative-volume gate and 1.5R target",
+  "Target, stop, or unresolved outcome recorded from later candles",
+];
 
 export function BacktestTransparency() {
   return (
-    <section className="relative overflow-hidden py-28">
-      <img
-        src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1600&q=60&auto=format&fit=crop"
-        alt=""
+    <section id="track-record" className="relative scroll-mt-20 overflow-hidden py-20 sm:py-28">
+      <div
         aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04] grayscale"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_45%,rgba(34,197,94,0.07),transparent_45%)]"
       />
-      <div className="relative mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-2xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-violet">
-            Backtest Transparency
-          </span>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-            Backtested, not guessed.
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Every setup is validated against real historical data — reproduced across repeat
-            runs, not a one-off. If the evidence doesn&apos;t hold up, we don&apos;t ship it.
-          </p>
-        </Reveal>
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-violet">
+              <FlaskConical size={15} /> Reproducible validation
+            </span>
+            <h2 className="mt-4 text-balance text-3xl font-bold tracking-tight sm:text-5xl">
+              One published result. Exact scope. No borrowed proof.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-muted-foreground sm:text-lg">
+              The 45% figure applies to one specific Confirmed System Planned Trade configuration. It is not presented as the win rate of every Zynost feature, every coin, or every future market regime.
+            </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-[1.3fr_1fr]">
-          <Reveal delay={0.1}>
-            <div className="overflow-x-auto rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-violet/40 hover:shadow-[0_20px_40px_-20px_rgba(139,92,246,0.4)]">
-              <table className="w-full min-w-[480px] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
-                    <th className="px-5 py-4 font-medium">Strategy Zone</th>
-                    <th className="px-5 py-4 font-medium">Win Rate</th>
-                    <th className="px-5 py-4 font-medium">Avg R</th>
-                    <th className="px-5 py-4 font-medium">Sample Size</th>
-                    <th className="px-5 py-4 font-medium">Expectancy</th>
-                  </tr>
-                </thead>
-                <tbody className="font-tabular">
-                  {ZONES.map((z) => (
-                    <tr key={z.zone} className="border-b border-border last:border-0">
-                      <td className="px-5 py-4 font-sans">{z.zone}</td>
-                      <td className="px-5 py-4">{z.winRate}%</td>
-                      <td className="px-5 py-4 text-bullish">{z.avgR}</td>
-                      <td className="px-5 py-4 text-muted-foreground">{z.n}</td>
-                      <td className="px-5 py-4 text-bullish">{z.expectancy}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="mt-8 rounded-2xl border border-warn/25 bg-warn/[0.06] p-5">
+              <div className="flex gap-3">
+                <AlertTriangle size={19} className="mt-0.5 shrink-0 text-warn" />
+                <div>
+                  <h3 className="text-sm font-semibold">What does not inherit this result</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    Emerging composite signals, extreme-volatility watches, DEX confirmations, and order-book persistence use separate forward outcome tracking until their own samples are meaningful.
+                  </p>
+                </div>
+              </div>
             </div>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.2}>
-            <div className="h-full rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-violet/40 hover:shadow-[0_20px_40px_-20px_rgba(139,92,246,0.4)]">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Performance Distribution (R)
-              </p>
-              <div className="mt-6 flex h-40 items-end gap-1.5">
-                {HISTOGRAM.map((h, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ height: 0 }}
-                    whileInView={{ height: `${h * 2.4}px` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.04, ease: "easeOut" }}
-                    className={`flex-1 rounded-t ${
-                      i < 5 ? "bg-bearish/50" : i === 5 ? "bg-violet" : "bg-bullish/60"
-                    }`}
-                  />
+          <div className="overflow-hidden rounded-3xl border border-border bg-card/75">
+            <div className="border-b border-border p-6 sm:p-8">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.16em] text-bullish">Confirmed configuration</div>
+                  <h3 className="mt-2 text-xl font-bold">Momentum + liquidity + RVOL</h3>
+                </div>
+                <span className="rounded-full border border-bullish/25 bg-bullish/10 px-3 py-1.5 text-xs font-semibold text-bullish">
+                  Positive expectancy
+                </span>
+              </div>
+
+              <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
+                {RESULT.map((metric) => (
+                  <div key={metric.label} className="bg-background p-4 sm:p-5">
+                    <div className="font-tabular text-2xl font-bold text-foreground sm:text-3xl">{metric.value}</div>
+                    <div className="mt-1 text-[11px] leading-4 text-muted-foreground">{metric.label}</div>
+                  </div>
                 ))}
               </div>
-              <div className="mt-3 flex justify-between font-tabular text-[10px] text-muted-foreground">
-                <span>-2R</span>
-                <span>-1R</span>
-                <span>0</span>
-                <span>+1R</span>
-                <span>+2R</span>
+            </div>
+
+            <div className="grid gap-8 p-6 sm:p-8 md:grid-cols-[1fr_auto_15rem]">
+              <div>
+                <h3 className="text-sm font-semibold">How the replay works</h3>
+                <ul className="mt-4 space-y-3">
+                  {METHOD.map((item) => (
+                    <li key={item} className="flex gap-2.5 text-sm leading-5 text-muted-foreground">
+                      <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-bullish" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="hidden w-px bg-border md:block" />
+
+              <div className="md:max-w-[15rem]">
+                <TrendingUp size={20} className="text-violet" />
+                <h3 className="mt-4 text-sm font-semibold">Why 45% can still be positive</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Wins target 1.5R while the simulated stop is smaller. Win rate alone is not the edge; average realized R is the more useful result.
+                </p>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
 
-        <p className="mt-6 text-xs text-muted-foreground">
-          Reproduced across repeat runs. Not a one-off.
+        <p className="mt-5 text-xs leading-5 text-muted-foreground">
+          Backtests are historical simulations, not guarantees. Fees, slippage, intraday path ambiguity, changing liquidity, and future market conditions can change live outcomes.
         </p>
       </div>
     </section>

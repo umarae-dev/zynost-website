@@ -10,15 +10,9 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="relative overflow-hidden py-28">
-      <img
-        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=60&auto=format&fit=crop"
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04] grayscale"
-      />
-      <div className="relative mx-auto max-w-3xl px-6">
+    <section className="relative overflow-hidden py-20 sm:py-28">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.06),transparent_55%)]" />
+      <div className="relative mx-auto max-w-3xl px-5 sm:px-6">
         <Reveal className="text-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-violet">FAQ</span>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl">

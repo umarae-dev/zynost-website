@@ -12,15 +12,9 @@ export function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="relative overflow-hidden py-28">
-      <img
-        src="https://images.unsplash.com/photo-1550439062-609e1531270e?w=1600&q=60&auto=format&fit=crop"
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04] grayscale"
-      />
-      <div className="relative mx-auto max-w-7xl px-6">
+    <section id="pricing" className="relative scroll-mt-20 overflow-hidden py-20 sm:py-28">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_35%,rgba(139,92,246,0.08),transparent_50%)]" />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6">
         <Reveal className="text-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-violet">
             Pricing
@@ -47,7 +41,7 @@ export function Pricing() {
             />
           </button>
           <span className={cn("text-sm", annual && "font-semibold text-foreground", !annual && "text-muted-foreground")}>
-            Annual <span className="text-bullish">(Save 20%)</span>
+            Annual <span className="text-bullish">(Save 15%)</span>
           </span>
         </Reveal>
 

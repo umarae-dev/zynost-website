@@ -26,6 +26,8 @@ const CARDS = [
 export function Problem() {
   return (
     <section className="relative overflow-hidden py-28">
+      {/* Kept for this legacy, currently-unmounted section. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=60&auto=format&fit=crop"
         alt=""

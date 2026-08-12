@@ -324,7 +324,6 @@ export function ScrollStack({
       transformsCache.clear();
       lastScrollTopRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemDistance, useWindowScroll, measure, updateCardTransforms, startScrollLoop]);
 
   return (

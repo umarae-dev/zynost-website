@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Bot, Workflow, Tag, Info, ChevronDown, ArrowUpRight, Menu, X } from "lucide-react";
@@ -21,7 +22,6 @@ const NAV_ICONS = [Home, Bot, Workflow, Tag, Info];
 // The dropdown pill in the navbar itself, pulling in company + legal
 // pages that otherwise only lived in the footer.
 const COMPANY_DROPDOWN_LINKS = [
-  { label: "About Us", href: "/about" },
   { label: "Contact", href: "mailto:billing@zynost.com" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms" },
@@ -100,7 +100,7 @@ export function Navbar() {
         )}
       >
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
-          <img
+          <Image
             src="/zynost-logo.png"
             alt={`${SITE.name} logo`}
             width={40}
@@ -171,15 +171,17 @@ export function Navbar() {
           </MagneticButton>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          className="relative z-[70] flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/[0.03] text-foreground lg:hidden"
-        >
-          {mobileOpen ? <X size={19} /> : <Menu size={19} />}
-        </button>
+        {!mobileOpen && (
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={false}
+            className="relative z-[70] flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/[0.03] text-foreground lg:hidden"
+          >
+            <Menu size={19} />
+          </button>
+        )}
       </nav>
       </header>
 
@@ -189,7 +191,12 @@ export function Navbar() {
           instantly (conditional render), just a fast CSS opacity fade,
           no framer-motion, no staggered list entrance. */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-2xl duration-200 animate-in fade-in lg:hidden">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-2xl duration-200 animate-in fade-in lg:hidden"
+        >
           <div
             aria-hidden
             className="pointer-events-none absolute -top-32 right-0 h-72 w-72 rounded-full bg-violet/20 blur-[100px]"

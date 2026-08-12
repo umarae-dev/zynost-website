@@ -8,20 +8,17 @@ import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { SITE } from "@/lib/constants";
 
 const CHECKS = [
-  "RVOL confirmation filters out manipulation",
-  "Multi-exchange liquidity verification",
-  "Backtested zones with historical performance",
+  "Relative volume must clear the confirmed gate",
+  "Momentum and liquidity are checked across exchanges",
+  "Entries, stops, and targets use deterministic ATR math",
 ];
 
 export function SystemPlannedTrade() {
   return (
     <section id="system-planned-trade" className="relative overflow-hidden py-28">
-      <img
-        src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1600&q=60&auto=format&fit=crop"
-        alt=""
+      <div
         aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04] grayscale"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_45%,rgba(139,92,246,0.10),transparent_45%)]"
       />
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
         <Reveal>
@@ -32,9 +29,9 @@ export function SystemPlannedTrade() {
             The system finds it before you go looking.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Every 10 minutes, Zynost scans ~3,000 real coins merged across 14 exchanges plus
-            on-chain DEX activity, confirms genuine — not manipulated — volume spikes, and
-            surfaces real, backtested trade setups automatically.
+            Every 10 minutes, Zynost ranks live movers across 14 supported exchanges and
+            on-chain DEX activity. The Confirmed tier must clear the historically tested
+            2.0x relative-volume gate before the planning engine calculates a setup.
           </p>
           <ul className="mt-6 space-y-3">
             {CHECKS.map((c) => (
@@ -44,6 +41,20 @@ export function SystemPlannedTrade() {
               </li>
             ))}
           </ul>
+          <div className="mt-6 grid gap-2 text-xs sm:grid-cols-3">
+            <div className="rounded-xl border border-bullish/20 bg-bullish/[0.06] p-3">
+              <span className="font-semibold text-bullish">Confirmed</span>
+              <p className="mt-1 leading-5 text-muted-foreground">Historically tested configuration.</p>
+            </div>
+            <div className="rounded-xl border border-violet/20 bg-violet/[0.06] p-3">
+              <span className="font-semibold text-violet">Emerging</span>
+              <p className="mt-1 leading-5 text-muted-foreground">Forward-tracked separately.</p>
+            </div>
+            <div className="rounded-xl border border-warn/20 bg-warn/[0.06] p-3">
+              <span className="font-semibold text-warn">Extreme watch</span>
+              <p className="mt-1 leading-5 text-muted-foreground">No backtest claim applied.</p>
+            </div>
+          </div>
           <MagneticButton href={SITE.appUrl} className="mt-8">
             Explore live setups
           </MagneticButton>
@@ -63,7 +74,7 @@ export function SystemPlannedTrade() {
                 <div className="text-sm font-semibold">Solana</div>
               </div>
               <span className="rounded-full bg-bullish/15 px-2.5 py-1 text-[10px] font-bold text-bullish">
-                TREND: Bullish
+                EXAMPLE PLAN
               </span>
             </div>
 
@@ -150,7 +161,7 @@ export function SystemPlannedTrade() {
               </motion.div>
             </div>
             <div className="mt-2 text-right text-[10px] text-muted-foreground">
-              Sample Size: <AnimatedCounter value={328} /> trades
+              Historical sample: <AnimatedCounter value={201} /> resolved picks
             </div>
           </div>
         </motion.div>

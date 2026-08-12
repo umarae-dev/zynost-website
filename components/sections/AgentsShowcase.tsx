@@ -59,23 +59,17 @@ export function AgentsShowcase() {
 
   return (
     <section id="agents" className="relative overflow-hidden border-y border-border bg-surface/40 py-24">
-      <img
-        src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=60&auto=format&fit=crop"
-        alt=""
-        aria-hidden
-        loading="lazy"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.04] grayscale"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.08),transparent_58%)]" />
       <div className="relative mx-auto max-w-7xl px-6">
         <span className="text-xs font-semibold uppercase tracking-wider text-violet">
-          18 AI Agents
+          18 intelligence modules
         </span>
         <h2 className="mt-3 max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
-          18 specialists. One verdict.
+          A research team — and the tools around it.
         </h2>
         <p className="mt-3 max-w-xl text-muted-foreground">
-          Each agent analyzes from a unique lens. Together, they remove blind spots no single
-          model — or human — reliably catches alone.
+          All 18 agents have distinct responsibilities across market research, critical review,
+          trade planning, portfolio intelligence, coaching, psychology, and learning.
         </p>
       </div>
 

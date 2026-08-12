@@ -95,9 +95,11 @@ const jsonLd = {
       operatingSystem: "Web",
       description: SITE.description,
       offers: {
-        "@type": "Offer",
-        price: "29",
+        "@type": "AggregateOffer",
+        lowPrice: "0",
+        highPrice: "16.99",
         priceCurrency: "USD",
+        offerCount: "3",
       },
     },
   ],

@@ -15,7 +15,7 @@ const CARDS: Card[] = [
     image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f",
     eyebrow: "Market Analysis",
     headline: "Every signal, fully backtested.",
-    copy: "No guesses. Every setup Zynost surfaces has already been tested against real historical data.",
+    copy: "The Confirmed System Planned Trade configuration publishes its historical sample and assumptions; newer signals build a separate forward record.",
   },
   {
     image: "https://images.unsplash.com/photo-1639322537228-f710d846310a",
@@ -27,7 +27,7 @@ const CARDS: Card[] = [
     image: "https://images.unsplash.com/photo-1605792657660-596af9009e82",
     eyebrow: "Full Coverage",
     headline: "Every coin, every angle.",
-    copy: "~3,000 real coins scanned across 14 exchanges plus on-chain DEX activity, every 10 minutes.",
+    copy: "An 8,098-asset catalog, 14 supported exchange fallbacks, and on-chain DEX activity feed discovery across the market.",
   },
   {
     image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9",
@@ -55,6 +55,8 @@ function ShowcaseCard({ card, index }: { card: Card; index: number }) {
     <div className="rounded-3xl border border-border bg-card p-4 shadow-2xl shadow-black/20 transition-colors duration-300 hover:border-violet/40 sm:p-6">
       <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10">
         <div className={cn("relative h-64 overflow-hidden rounded-2xl sm:h-80 md:h-[24rem]", imageRight && "md:order-2")}>
+          {/* Remote editorial art in this legacy, currently-unmounted stack. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`${card.image}?w=1200&q=75&auto=format&fit=crop`}
             alt=""

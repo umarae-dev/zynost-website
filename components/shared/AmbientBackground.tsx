@@ -23,7 +23,10 @@ export function AmbientBackground() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT_PX);
+    const frame = requestAnimationFrame(() => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT_PX);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (

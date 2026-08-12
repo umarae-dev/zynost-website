@@ -14,8 +14,8 @@ const MOBILE_BREAKPOINT_PX = 768;
 const FEATURES = [
   {
     icon: Bot,
-    title: "18 AI Agents, One Verdict",
-    desc: "Every coin gets analyzed from 18 independent angles before a single verdict is formed — no blind spots one model alone would miss.",
+    title: "18 AI Agents, One System",
+    desc: "Relevant agents activate across research, critical review, planning, portfolio, coaching, psychology, and learning — each with a distinct responsibility.",
   },
   {
     icon: LineChart,
@@ -83,7 +83,10 @@ export function FeatureReveal() {
   const [pinEnabled, setPinEnabled] = useState(false);
 
   useLayoutEffect(() => {
-    setPinEnabled(window.innerWidth >= MOBILE_BREAKPOINT_PX);
+    const frame = requestAnimationFrame(() => {
+      setPinEnabled(window.innerWidth >= MOBILE_BREAKPOINT_PX);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useLayoutEffect(() => {

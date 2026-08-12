@@ -25,11 +25,14 @@ export function SplashCursor() {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    const isWide = window.innerWidth >= MOBILE_BREAKPOINT_PX;
-    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const probe = document.createElement("canvas");
-    const hasWebGL = !!(probe.getContext("webgl") || probe.getContext("experimental-webgl"));
-    setEnabled(isWide && hasFinePointer && hasWebGL);
+    const frame = requestAnimationFrame(() => {
+      const isWide = window.innerWidth >= MOBILE_BREAKPOINT_PX;
+      const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const probe = document.createElement("canvas");
+      const hasWebGL = !!(probe.getContext("webgl") || probe.getContext("experimental-webgl"));
+      setEnabled(isWide && hasFinePointer && hasWebGL);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
