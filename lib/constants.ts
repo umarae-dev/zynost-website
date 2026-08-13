@@ -52,7 +52,7 @@ export const STATS = [
   { value: 18, suffix: "", label: "Specialist AI agents" },
   { value: 14, suffix: "", label: "Exchanges checked" },
   { value: 8098, suffix: "", label: "Coin catalog" },
-  { value: 3, suffix: "", label: "Free analyses" },
+  { value: 5, suffix: "", label: "Free real-time signals" },
 ];
 
 export const EXCHANGES = [
@@ -76,11 +76,11 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     name: "Free",
     price: null,
-    description: "3 full analyses, forever — no card, no crypto, no trial.",
+    description: "Unlimited real-time research, forever — no card, no crypto, no trial.",
     features: [
-      "3 full analyses — lifetime",
-      "18-agent intelligence system",
-      "Trade Plan, Portfolio, Coach & Psychology agents",
+      "Unlimited coin research — any coin, no cap",
+      "Real technical, liquidity & smart-money data",
+      "Free Trade Plan zones (entry, stop, target)",
       "Real-time price & market data",
       "Watchlist, alerts, portfolio tracking",
     ],
@@ -93,6 +93,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "250 analyses / month",
       "8 analyses / day cap",
       "18-agent intelligence system",
+      "Trade Plan, Portfolio, Coach & Psychology agents",
       "System Planned Trade — auto-picked trades",
       "Early Activity alerts",
       "Everything in Free",
@@ -115,6 +116,10 @@ export const PRICING_TIERS: PricingTier[] = [
 ];
 
 export const FAQS = [
+  {
+    q: "What can I use for free?",
+    a: "Free includes unlimited real-time coin research from computed technical, structure, liquidity, smart-money, volatility, and trade-plan data. It never uses an analysis credit. Pro and Pro Plus add the narrated specialist analysis, portfolio and coaching agents, the Skeptic/Judge verdict, and premium system-picked trade features.",
+  },
   {
     q: "What makes Zynost different from signal groups?",
     a: "Signal groups usually give you a call without an auditable reasoning chain. Zynost keeps each specialist's evidence visible, runs a dedicated Skeptic against the consensus, and separates historically backtested setups from newer signals that are still being forward-tracked.",

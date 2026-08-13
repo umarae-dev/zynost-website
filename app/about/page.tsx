@@ -97,7 +97,7 @@ export default function AboutPage() {
       <Reveal delay={0.1} className="mt-16 rounded-2xl border border-border bg-surface/60 p-10 text-center">
         <h2 className="text-2xl font-bold tracking-tight">See it for yourself.</h2>
         <p className="mt-2 text-muted-foreground">
-          No credit card required to start your free trial.
+          No credit card required for unlimited free research.
         </p>
         <div className="mt-6 flex justify-center">
           <MagneticButton href={SITE.appUrl}>Start free</MagneticButton>

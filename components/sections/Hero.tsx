@@ -68,7 +68,7 @@ export function Hero() {
           </p>
 
           <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs text-foreground/75 sm:text-sm">
-            {["3 full analyses free", "No card required", "No auto-trading"].map((item) => (
+            {["Free real-time research", "No card required", "No auto-trading"].map((item) => (
               <span key={item} className="inline-flex items-center gap-1.5">
                 <Check size={14} className="text-bullish" />
                 {item}

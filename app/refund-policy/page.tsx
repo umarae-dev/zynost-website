@@ -67,7 +67,7 @@ const sections: LegalSection[] = [
       <ul className="list-disc space-y-2 pl-5">
         <li>Accounts terminated for violating our Terms &amp; Conditions.</li>
         <li>Requests made more than 30 days after the payment was confirmed.</li>
-        <li>Free-tier credits — these were never paid for, so there&apos;s nothing to refund.</li>
+        <li>Free-tier research features — these are provided at no charge, so there&apos;s nothing to refund.</li>
       </ul>
     ),
   },
