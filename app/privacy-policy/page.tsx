@@ -57,8 +57,50 @@ const sections: LegalSection[] = [
     ),
   },
   {
+    id: "uqx-app",
+    title: "3. UQX App — Additional Data We Collect",
+    body: (
+      <>
+        <p>
+          UQX, our rewards app built on {SITE.name}&apos;s infrastructure, collects a few
+          additional data types beyond what&apos;s listed above, specific to how that app
+          works:
+        </p>
+        <ul className="list-disc space-y-2 pl-5">
+          <li>
+            <strong className="text-foreground">Phone number.</strong> Collected during account
+            registration for account verification and security purposes.
+          </li>
+          <li>
+            <strong className="text-foreground">Profile photo.</strong> Optionally uploaded by
+            the user to personalize their account; can be changed or removed at any time.
+          </li>
+          <li>
+            <strong className="text-foreground">Referral relationships.</strong> Your referral
+            code and which users you&apos;ve referred, used to calculate referral rewards.
+          </li>
+          <li>
+            <strong className="text-foreground">UQX balance and transfer history.</strong> An
+            internal ledger of your UQX balance and any peer-to-peer transfers between UQX
+            users — this is an app-level record, not a public blockchain transaction.
+          </li>
+          <li>
+            <strong className="text-foreground">Push notification device token.</strong> A
+            device-specific identifier used solely to deliver in-app notifications (account
+            activity, transfer alerts); never used for advertising.
+          </li>
+          <li>
+            <strong className="text-foreground">Two-factor authentication data.</strong> If you
+            enable 2FA, we store a securely hashed authentication secret and one-way-hashed
+            backup recovery codes — never in plain text.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
     id: "how-we-use",
-    title: "3. How We Use Your Information",
+    title: "4. How We Use Your Information",
     body: (
       <ul className="list-disc space-y-2 pl-5">
         <li>To provide, operate, and maintain the Service.</li>
@@ -71,7 +113,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "third-parties",
-    title: "4. Third-Party Services",
+    title: "5. Third-Party Services",
     body: (
       <>
         <p>
@@ -104,7 +146,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "cookies",
-    title: "5. Cookies",
+    title: "6. Cookies",
     body: (
       <p>
         We use essential cookies/local storage to keep you signed in and remember your
@@ -114,7 +156,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "data-retention",
-    title: "6. Data Retention",
+    title: "7. Data Retention",
     body: (
       <p>
         We retain your account data for as long as your account is active. If you delete your
@@ -125,7 +167,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "your-rights",
-    title: "7. Your Rights",
+    title: "8. Your Rights",
     body: (
       <p>
         You can access, correct, export, or delete your personal data at any time from your
@@ -140,7 +182,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "children",
-    title: "8. Children's Privacy",
+    title: "9. Children's Privacy",
     body: (
       <p>
         The Service is not directed to anyone under 18. We do not knowingly collect personal
@@ -151,7 +193,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "changes",
-    title: "9. Changes to This Policy",
+    title: "10. Changes to This Policy",
     body: (
       <p>
         We may update this Privacy Policy from time to time. We&apos;ll notify you of material
@@ -161,7 +203,7 @@ const sections: LegalSection[] = [
   },
   {
     id: "contact",
-    title: "10. Contact Us",
+    title: "11. Contact Us",
     body: (
       <p>
         Questions about this policy? Email{" "}
