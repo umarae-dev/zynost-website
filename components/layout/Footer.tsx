@@ -38,6 +38,14 @@ const FOOTER_COLUMNS = [
       { label: "Refund Policy", href: "/refund-policy" },
     ],
   },
+  {
+    heading: "UQX",
+    links: [
+      { label: "Roadmap", href: "/roadmap" },
+      { label: "Whitepaper", href: "/whitepaper" },
+      { label: "Tokenomics", href: "/tokenomics" },
+    ],
+  },
 ];
 
 function FooterLink({ label, href }: { label: string; href: string }) {
@@ -69,7 +77,7 @@ export function Footer() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-7">
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} home`}>
               <Image
