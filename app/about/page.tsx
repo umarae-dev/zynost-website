@@ -1,14 +1,42 @@
 import type { Metadata } from "next";
-import { Eye, ShieldCheck, Gavel, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Eye, ShieldCheck, Gavel, Sparkles, LineChart, Wallet, Coins, ArrowUpRight } from "lucide-react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/Reveal";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { MagneticButton } from "@/components/shared/MagneticButton";
-import { STATS, SITE } from "@/lib/constants";
+import { STATS, SITE, ZYNOST_PAY_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About Us",
   description: `Why we built ${SITE.name} — decision intelligence over hype.`,
 };
+
+const PRODUCTS = [
+  {
+    icon: LineChart,
+    name: "Zynost",
+    role: "AI trading intelligence",
+    body: "The 18-agent research workspace this page is about — live analysis, backtested trade plans, and a Skeptic that argues the other side before you see a verdict.",
+    href: SITE.appUrl,
+    linkLabel: "app.zynost.com",
+  },
+  {
+    icon: Wallet,
+    name: "Zynost Pay",
+    role: "Payments infrastructure",
+    body: "Our merchant payment gateway — wallet-connect checkout and settlement, built on the same crypto-native infrastructure as everything else under Zynost.",
+    href: ZYNOST_PAY_URL,
+    linkLabel: "pay.zynost.com",
+  },
+  {
+    icon: Coins,
+    name: "UQX",
+    role: "Rewards & mining app",
+    body: "A mobile rewards app built on Zynost's infrastructure, with its own referral system and token utility across the ecosystem, including Zynost Pay.",
+    href: "/tokenomics",
+    linkLabel: "UQX tokenomics",
+  },
+];
 
 const VALUES = [
   {
@@ -76,6 +104,37 @@ export default function AboutPage() {
           </div>
         ))}
       </Reveal>
+
+      <div className="mt-16">
+        <Reveal>
+          <h2 className="text-2xl font-bold tracking-tight">One ecosystem, three products</h2>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            {SITE.name} is the parent — everything below runs on the same infrastructure and
+            shares one identity.
+          </p>
+        </Reveal>
+        <RevealGroup className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {PRODUCTS.map((p) => (
+            <RevealItem key={p.name}>
+              <Link
+                href={p.href}
+                target={p.href.startsWith("http") ? "_blank" : undefined}
+                rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="group block h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-violet/50"
+              >
+                <p.icon size={20} className="text-violet" />
+                <h3 className="mt-4 font-semibold">{p.name}</h3>
+                <p className="text-xs text-muted-foreground">{p.role}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{p.body}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-violet">
+                  {p.linkLabel}
+                  <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </div>
 
       <div className="mt-16">
         <Reveal>
