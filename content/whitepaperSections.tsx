@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AGENTS, EXCHANGES, SITE } from "@/lib/constants";
 import type { LegalSection } from "@/components/legal/LegalPageShell";
+import { EcosystemDiagram } from "@/components/whitepaper/EcosystemDiagram";
 
 const TIER1 = AGENTS.filter((a) => a.tier === 1);
 const TIER2 = AGENTS.filter((a) => a.tier === 2);
@@ -117,6 +118,7 @@ export const whitepaperSections: LegalSection[] = [
           audience than a mining/rewards app, and mixing "serious financial tooling" with "tap this
           button daily for points" tends to cheapen both.
         </p>
+        <EcosystemDiagram />
         <h3 className="mt-6 text-base font-semibold text-foreground">2.2 Why this structure, specifically</h3>
         <p>
           Large, credible companies almost never bolt speculative token mechanics directly onto
@@ -494,6 +496,23 @@ export const whitepaperSections: LegalSection[] = [
           first, a public verification period, and a professional audit before any mainnet
           deployment carrying real value. This document will be updated as each of those steps
           completes.
+        </p>
+
+        <h3 className="mt-6 text-base font-semibold text-foreground">7.4 Verify it yourself</h3>
+        <p>
+          Most reward-token projects ask you to trust a whitepaper. We&apos;d rather you didn&apos;t
+          have to — once the contracts are live, here&apos;s exactly how to check our claims against
+          the actual blockchain, using free public tools, without asking us for anything:
+        </p>
+        <ul className="list-disc space-y-2 pl-5">
+          <li><strong className="text-foreground">Confirm the supply is really fixed.</strong> Open the UqxToken contract on BscScan, go to the &quot;Contract&quot; tab, and read the source code directly — search for any function containing the word <code>mint</code>. There isn&apos;t one, and BscScan&apos;s verified-source view means you&apos;re reading the exact code that&apos;s running, not a claim about it.</li>
+          <li><strong className="text-foreground">Confirm your own vesting schedule.</strong> The UQX app will show you the exact numbers it&apos;s using — your total allocation, your allocation type, and the cryptographic proof tied to your address — the same inputs the <code>claim()</code> function checks on-chain. You can call <code>claimable(yourAddress, yourAmount, yourType)</code> directly on BscScan&apos;s &quot;Read Contract&quot; tab at any time and get the same answer the app shows you, independently.</li>
+          <li><strong className="text-foreground">Confirm the liquidity lock.</strong> Once DEX liquidity is locked, the lock will be through a well-known public locker service, and the lock address and unlock date will be published — checkable by anyone, not just us.</li>
+          <li><strong className="text-foreground">Confirm the vesting root matches the real snapshot.</strong> The full mining and presale allocation data used to build the Merkle root will be published so anyone technical enough can independently recompute the same root from scratch and compare it against what&apos;s on-chain.</li>
+        </ul>
+        <p>
+          None of this requires trusting us specifically — it requires trusting arithmetic and
+          public blockchain data, which is the whole point.
         </p>
       </>
     ),
