@@ -1,0 +1,44 @@
+/* Print stylesheet for the long-form document pages (Whitepaper, Roadmap,
+ * Tokenomics) — imported directly by those pages only, kept in its own file
+ * rather than touching the shared app/globals.css. Elements opt in with
+ * .print-hide / .print-page, so this can't affect any page that doesn't
+ * import it. */
+
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+
+  .print-page {
+    background: #ffffff !important;
+    color: #111111 !important;
+    max-width: 100% !important;
+  }
+
+  .print-page * {
+    background: transparent !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .print-page a {
+    color: #111111 !important;
+    text-decoration: underline !important;
+  }
+
+  .print-page h1,
+  .print-page h2,
+  .print-page h3 {
+    break-after: avoid;
+  }
+
+  .print-page section {
+    break-inside: avoid-page;
+  }
+
+  .print-page svg,
+  .print-page canvas {
+    filter: grayscale(1) contrast(1.2);
+  }
+}

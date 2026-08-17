@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import "@/styles/print.css";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/Reveal";
 import { MagneticButton } from "@/components/shared/MagneticButton";
+import { PrintButton } from "@/components/shared/PrintButton";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -12,6 +14,7 @@ export const metadata: Metadata = {
 type Product = {
   name: string;
   tagline: string;
+  summary: string;
   shipped: string[];
   next: string[];
 };
@@ -20,6 +23,8 @@ const PRODUCTS: Product[] = [
   {
     name: "Zynost",
     tagline: "AI Intelligence Platform — app.zynost.com",
+    summary:
+      "A research workspace, not a signal channel. Every verdict is backed by visible reasoning from specialist agents that argue with each other before committing to a view — see the Whitepaper for the full architecture.",
     shipped: [
       "17 specialist AI agents working together — research, planning, portfolio, coaching, psychology, and learning",
       "Decision Brief — an evidence-grounded synthesis, generated fresh in whichever language you ask for",
@@ -37,6 +42,8 @@ const PRODUCTS: Product[] = [
   {
     name: "Zynost Pay",
     tagline: "Payment Gateway — pay.zynost.com",
+    summary:
+      "Non-custodial checkout infrastructure a merchant can trust without having to trust us with their customers' funds — money moves wallet-to-wallet, on-chain, every time.",
     shipped: [
       "Non-custodial gasless checkout on BNB Smart Chain (ERC-4337 — no gas fee for the customer)",
       "WalletConnect v2, plus direct support for MetaMask, Trust Wallet, and other injected wallets",
@@ -60,12 +67,17 @@ const UQX_PHASES = [
 
 export default function RoadmapPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-20">
+    <div className="print-page mx-auto max-w-5xl px-6 py-20">
       <Reveal>
-        <span className="text-xs font-semibold uppercase tracking-wider text-violet">Roadmap</span>
-        <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          What's shipped, and what's next.
-        </h1>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-violet">Roadmap</span>
+            <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
+              What's shipped, and what's next.
+            </h1>
+          </div>
+          <div className="print-hide mt-1"><PrintButton label="Download as PDF" /></div>
+        </div>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Zynost is a real, live ecosystem, not a whitepaper promise. Here's exactly what's already
           shipped across every product, and where each one is headed next.
@@ -77,6 +89,7 @@ export default function RoadmapPage() {
           <Reveal>
             <h2 className="text-2xl font-bold tracking-tight">{product.name}</h2>
             <p className="mt-1 text-sm text-muted-foreground">{product.tagline}</p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{product.summary}</p>
           </Reveal>
 
           <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">

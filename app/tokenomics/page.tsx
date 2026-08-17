@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import "@/styles/print.css";
 import { ShieldCheck, Lock, Coins, TrendingUp } from "lucide-react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/Reveal";
 import { MagneticButton } from "@/components/shared/MagneticButton";
+import { PrintButton } from "@/components/shared/PrintButton";
 import { AllocationChart } from "@/components/tokenomics/AllocationChart";
 import { SITE } from "@/lib/constants";
 
@@ -40,14 +42,42 @@ const PHASES = [
   { phase: "Phase 4", title: "Ecosystem", body: "UQX utility expands into Zynost Pay and the wider Zynost platform." },
 ];
 
+const FAQS = [
+  {
+    q: "Why 1,000,000,000 and not some other number?",
+    a: "The exact number matters less than the fraction of it that's free-to-market at any given time — see 'How this avoids the mistakes other reward tokens made' below. 1 billion is a comparatively small total supply next to other large-scale mining-reward tokens, and combined with the vesting schedule, it keeps the maximum possible circulating supply at any point well below what real utility demand would need to absorb.",
+  },
+  {
+    q: "Why is 20% liquid immediately instead of 0% or 100%?",
+    a: "0% would mean nobody can use or trade anything they've earned for months, which we think is unreasonable for people who mined for a long time or bought in presale. 100% is the mistake this whole design exists to avoid. 20% gives real, immediate usability without creating a launch-day supply shock — the remaining 80% still has to earn its way onto the market over months, not minutes.",
+  },
+  {
+    q: "Can the vesting schedule be changed after launch?",
+    a: "No. Once the vesting contract's root is set at launch, there is no function in the contract that can change it, accelerate it, or move it — for anyone, including us. See the Whitepaper's Technical Architecture section for the exact mechanism.",
+  },
+  {
+    q: "What happens to UQX that's mined but never claimed?",
+    a: "It simply sits, unclaimed, in the vesting contract indefinitely — nobody else can claim it, and it isn't redirected anywhere. In practice, some fraction of any large user base stops being active over time, so unclaimed balances act as a natural (if unplanned) reduction in effective circulating supply.",
+  },
+  {
+    q: "Is the presale price fixed?",
+    a: "Presale pricing and any tiered/round structure will be published in a dedicated presale terms document before the presale opens — we're not publishing a price here until it's final, rather than committing to a number that might need to change.",
+  },
+];
+
 export default function TokenomicsPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-20">
+    <div className="print-page mx-auto max-w-5xl px-6 py-20">
       <Reveal>
-        <span className="text-xs font-semibold uppercase tracking-wider text-violet">Tokenomics</span>
-        <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          Designed to be held, not dumped.
-        </h1>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-violet">Tokenomics</span>
+            <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
+              Designed to be held, not dumped.
+            </h1>
+          </div>
+          <div className="print-hide mt-1"><PrintButton label="Download as PDF" /></div>
+        </div>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           UQX has a fixed supply of <strong className="text-foreground">1,000,000,000 tokens</strong> on
           BNB Smart Chain. Every allocation below — including the tokens you mine for free in the app —
@@ -129,6 +159,23 @@ export default function TokenomicsPage() {
           Timelines are internal targets, not guarantees — they depend on regulatory review, security
           audits, and market conditions at each stage.
         </p>
+      </div>
+
+      {/* FAQ */}
+      <div className="mt-16">
+        <Reveal>
+          <h2 className="text-2xl font-bold tracking-tight">Frequently Asked Questions</h2>
+        </Reveal>
+        <RevealGroup className="mt-8 space-y-4">
+          {FAQS.map((f) => (
+            <RevealItem key={f.q}>
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <h3 className="font-semibold">{f.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+              </div>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </div>
 
       {/* Disclaimer */}

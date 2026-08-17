@@ -21,11 +21,13 @@ export function LegalPageShell({
   updatedAt,
   intro,
   sections,
+  actions,
 }: {
   title: string;
   updatedAt: string;
   intro?: ReactNode;
   sections: LegalSection[];
+  actions?: ReactNode;
 }) {
   const [active, setActive] = useState(sections[0]?.id);
 
@@ -49,15 +51,18 @@ export function LegalPageShell({
   }, [sections]);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-20">
+    <div className="print-page mx-auto max-w-7xl px-6 py-20">
       <div className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
+          {actions && <div className="print-hide shrink-0">{actions}</div>}
+        </div>
         <p className="mt-3 text-sm text-muted-foreground">Last updated: {updatedAt}</p>
         {intro && <div className="mt-6 text-muted-foreground">{intro}</div>}
       </div>
 
       <div className="mt-14 grid grid-cols-1 gap-12 lg:grid-cols-[220px_1fr]">
-        <nav className="hidden lg:block">
+        <nav className="print-hide hidden lg:block">
           <div className="sticky top-24 space-y-1 border-l border-border pl-4">
             {sections.map((s) => (
               <a
@@ -76,7 +81,7 @@ export function LegalPageShell({
           </div>
         </nav>
 
-        <div className="max-w-[680px] space-y-12">
+        <div className="max-w-[680px] space-y-12 print:max-w-full">
           {sections.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-24">
               <h2 className="text-xl font-semibold">{s.title}</h2>
