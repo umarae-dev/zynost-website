@@ -186,11 +186,12 @@ export default function TokenomicsPage() {
           not an investment product, and no one associated with {SITE.name} offers guaranteed returns,
           price targets, or financial advice of any kind. Cryptocurrency carries real risk, including
           total loss of value — only participate with what you can afford to lose, and always do your own
-          research. Full terms will be published alongside the presale.
+          research.
         </p>
       </Reveal>
 
-      <Reveal delay={0.16} className="mt-10 flex justify-center">
+      <Reveal delay={0.16} className="mt-10 flex flex-wrap justify-center gap-4">
+        <MagneticButton href="/presale">Join the Presale</MagneticButton>
         <MagneticButton href="/roadmap">See the full Roadmap</MagneticButton>
       </Reveal>
     </div>

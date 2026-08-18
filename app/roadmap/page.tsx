@@ -152,7 +152,10 @@ export default function RoadmapPage() {
         <p className="max-w-md text-muted-foreground">
           Supply, allocation, and vesting are laid out in detail on the Tokenomics page.
         </p>
-        <MagneticButton href="/tokenomics">View Tokenomics</MagneticButton>
+        <div className="flex flex-wrap justify-center gap-4">
+          <MagneticButton href="/presale">Join the Presale</MagneticButton>
+          <MagneticButton href="/tokenomics">View Tokenomics</MagneticButton>
+        </div>
       </Reveal>
     </div>
   );

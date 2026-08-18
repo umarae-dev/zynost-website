@@ -41,6 +41,7 @@ const FOOTER_COLUMNS = [
   {
     heading: "UQX",
     links: [
+      { label: "Presale", href: "/presale" },
       { label: "Roadmap", href: "/roadmap" },
       { label: "Whitepaper", href: "/whitepaper" },
       { label: "Tokenomics", href: "/tokenomics" },
