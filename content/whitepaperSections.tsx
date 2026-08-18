@@ -480,11 +480,31 @@ export const whitepaperSections: LegalSection[] = [
           it, redirect a claim, or move a user's tokens without that user's own transaction.
         </p>
         <p>
+          The vesting contract does carry one narrow safety valve — a pause switch that can halt
+          new claims in a genuine emergency (for example, a bug discovered after launch). Vesting
+          continues to accrue normally while paused; nothing already vested is lost or altered, it
+          simply can't be withdrawn until unpaused. We deliberately did not put this switch on the
+          token itself — UqxToken remains permanently free of any pause function, so the core
+          asset people hold and trade can never be frozen, only the claim mechanism for newly
+          vesting tokens.
+        </p>
+        <p>
+          This switch isn't controlled by a single key. The vesting contract's ownership sits with
+          an OpenZeppelin <code>TimelockController</code>, not a wallet. Proposing any owner action —
+          setting the launch snapshot, pausing, or unpausing — is restricted to a Safe{"{Wallet}"}{" "}
+          multisig requiring multiple independent approvals, and every proposed action then sits
+          publicly queued on-chain for a mandatory delay (48 hours by default) before it can
+          execute. Nobody, including us, can use this switch instantly or silently — anyone
+          watching the chain sees a proposed action and has the full delay window to react before
+          it takes effect.
+        </p>
+        <p>
           Both contracts are built on OpenZeppelin's audited base libraries rather than custom
           cryptographic or token-standard code, and both are covered by an automated test suite
           that verifies the exact behaviors described in this document — the vesting math, the
-          one-time root-set restriction, rejection of tampered or invalid claims, and correct
-          fixed-supply minting — run against a local blockchain simulation before any deployment.
+          one-time root-set restriction, rejection of tampered or invalid claims, correct
+          fixed-supply minting, and the full multisig-propose → delay → execute flow for every
+          owner action — run against a local blockchain simulation before any deployment.
         </p>
 
         <h3 className="mt-6 text-base font-semibold text-foreground">7.3 Honest status: audits and deployment</h3>
@@ -509,6 +529,7 @@ export const whitepaperSections: LegalSection[] = [
           <li><strong className="text-foreground">Confirm your own vesting schedule.</strong> The UQX app will show you the exact numbers it&apos;s using — your total allocation, your allocation type, and the cryptographic proof tied to your address — the same inputs the <code>claim()</code> function checks on-chain. You can call <code>claimable(yourAddress, yourAmount, yourType)</code> directly on BscScan&apos;s &quot;Read Contract&quot; tab at any time and get the same answer the app shows you, independently.</li>
           <li><strong className="text-foreground">Confirm the liquidity lock.</strong> Once DEX liquidity is locked, the lock will be through a well-known public locker service, and the lock address and unlock date will be published — checkable by anyone, not just us.</li>
           <li><strong className="text-foreground">Confirm the vesting root matches the real snapshot.</strong> The full mining and presale allocation data used to build the Merkle root will be published so anyone technical enough can independently recompute the same root from scratch and compare it against what&apos;s on-chain.</li>
+          <li><strong className="text-foreground">Watch for any pending admin action before it happens.</strong> Because every owner action on the vesting contract goes through the timelock, a proposed action is visible on-chain the moment it&apos;s queued — the timelock&apos;s <code>TimelockController</code> address on BscScan shows every scheduled operation and exactly when it becomes executable, well before it can run.</li>
         </ul>
         <p>
           None of this requires trusting us specifically — it requires trusting arithmetic and
