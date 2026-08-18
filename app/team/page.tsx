@@ -40,7 +40,7 @@ const TEAM: TeamMember[] = [
   },
   {
     name: "Syed Noor Khan",
-    role: "Co-Founder & Head of Business Development",
+    role: "Head of Business Development & Digital Marketing",
     bio: "Leads business development and digital marketing — growing Zynost's reach and partnerships across the ecosystem.",
     image: photoIfExists("syed-noor-khan.jpg"),
     linkedin: "https://www.linkedin.com/in/syednoor-khan-47406a386/",
@@ -57,7 +57,7 @@ export default function TeamPage() {
           The people building {SITE.name}.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          A small, real team — not an anonymous project. Every product across the ecosystem, from{" "}
+          Real people, not an anonymous project. Every product across the ecosystem, from{" "}
           {SITE.name} to Zynost Pay to UQX, is built and run by the people below.
         </p>
       </Reveal>
