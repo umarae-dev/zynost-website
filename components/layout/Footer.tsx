@@ -26,6 +26,7 @@ const FOOTER_COLUMNS = [
     heading: "Company",
     links: [
       { label: "About Us", href: "/about" },
+      { label: "Team", href: "/team" },
       { label: "Contact", href: "mailto:billing@zynost.com" },
     ],
   },

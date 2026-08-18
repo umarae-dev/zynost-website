@@ -4,6 +4,7 @@ import { Eye, ShieldCheck, Gavel, Sparkles, LineChart, Wallet, Coins, ArrowUpRig
 import { Reveal, RevealGroup, RevealItem } from "@/components/shared/Reveal";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { MagneticButton } from "@/components/shared/MagneticButton";
+import Dither from "@/components/effects/Dither";
 import { STATS, SITE, ZYNOST_PAY_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ const PRODUCTS = [
     icon: LineChart,
     name: "Zynost",
     role: "AI trading intelligence",
-    body: "The 18-agent research workspace this page is about — live analysis, backtested trade plans, and a Skeptic that argues the other side before you see a verdict.",
+    body: "The research workspace this page is about — live analysis, backtested trade plans, deterministic Institutional Lenses/FlowState/Market Twin, and a Decision Brief that argues the other side before you see a verdict.",
     href: SITE.appUrl,
     linkLabel: "app.zynost.com",
   },
@@ -52,7 +53,7 @@ const VALUES = [
   {
     icon: Gavel,
     title: "We argue with ourselves first",
-    body: "A dedicated Skeptic agent tries to break every bullish case before you ever see a verdict. Honesty is a feature, not an afterthought.",
+    body: "The Decision Brief tries to break every bullish case before you ever see a verdict. Honesty is a feature, not an afterthought.",
   },
   {
     icon: Sparkles,
@@ -64,14 +65,34 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-20">
-      <Reveal>
-        <span className="text-xs font-semibold uppercase tracking-wider text-violet">
-          About Us
-        </span>
-        <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
-          We got tired of guessing, so we built something that doesn&apos;t.
-        </h1>
-      </Reveal>
+      <div className="relative overflow-hidden rounded-3xl">
+        {/* Dithered wave backdrop, brand-violet tinted — the only place
+            on the site using this specific retro/CRT-dither texture, kept
+            to the About page's intro band rather than reused site-wide.
+            Heaviest of the three React Bits effects added this pass (full
+            R3F scene + a postprocessing pass), so it's scoped to one
+            contained header band rather than a full-page background. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-25">
+          <Dither
+            waveColor={[0.55, 0.36, 0.96]}
+            colorNum={4}
+            waveAmplitude={0.25}
+            waveFrequency={2.5}
+            waveSpeed={0.04}
+            enableMouseInteraction={false}
+          />
+        </div>
+        <div className="relative px-2 py-10 sm:px-4">
+          <Reveal>
+            <span className="text-xs font-semibold uppercase tracking-wider text-violet">
+              About Us
+            </span>
+            <h1 className="mt-3 text-balance text-4xl font-bold tracking-tight sm:text-5xl">
+              We got tired of guessing, so we built something that doesn&apos;t.
+            </h1>
+          </Reveal>
+        </div>
+      </div>
 
       <Reveal delay={0.1} className="mt-8 space-y-5 text-lg leading-relaxed text-muted-foreground">
         <p>
@@ -86,11 +107,12 @@ export default function AboutPage() {
           it thinks, clearly, with its reasoning shown?
         </p>
         <p>
-          That became 18 specialist agents, a Skeptic that actively hunts for holes in the
-          bullish case, and a Judge that weighs everything into one verdict. Every strategy we
-          surface is backtested against real history and published transparently — including
-          the times a strategy&apos;s edge turned out to be smaller than we first measured.
-          We&apos;d rather show you the correction than hide it.
+          That became 17 specialist agents feeding a deterministic evidence layer — Institutional
+          Lenses, FlowState, Market Twin — and one Decision Brief that actively hunts for holes
+          in the bullish case before weighing everything into a verdict, in your own language.
+          Every strategy we surface is backtested against real history and published
+          transparently — including the times a strategy&apos;s edge turned out to be smaller
+          than we first measured. We&apos;d rather show you the correction than hide it.
         </p>
       </Reveal>
 
@@ -153,7 +175,13 @@ export default function AboutPage() {
         </RevealGroup>
       </div>
 
-      <Reveal delay={0.1} className="mt-16 rounded-2xl border border-border bg-surface/60 p-10 text-center">
+      <Reveal delay={0.06} className="mt-10 flex justify-center">
+        <Link href="/team" className="text-sm text-violet underline underline-offset-2">
+          Meet the team building {SITE.name} →
+        </Link>
+      </Reveal>
+
+      <Reveal delay={0.1} className="mt-10 rounded-2xl border border-border bg-surface/60 p-10 text-center">
         <h2 className="text-2xl font-bold tracking-tight">See it for yourself.</h2>
         <p className="mt-2 text-muted-foreground">
           No credit card required for unlimited free research.
