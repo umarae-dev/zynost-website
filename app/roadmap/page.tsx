@@ -60,7 +60,7 @@ const PRODUCTS: Product[] = [
 
 const UQX_PHASES = [
   { phase: "Phase 1", title: "Mining", body: "Live now inside the UQX app. Earn UQX daily, boosted by referral tiers.", status: "current" as const },
-  { phase: "Phase 2", title: "Presale", body: "Real UQX, sent directly to your own wallet, ahead of public trading." },
+  { phase: "Phase 2", title: "Presale", body: "Real UQX, sent directly to your own wallet, ahead of public trading.", status: "current" as const },
   { phase: "Phase 3", title: "DEX Listing", body: "Public trading opens with locked, verifiable liquidity." },
   { phase: "Phase 4", title: "Ecosystem", body: "UQX utility expands into Zynost Pay and the wider Zynost platform." },
 ];
