@@ -36,6 +36,7 @@ const FOOTER_COLUMNS = [
       { label: "Terms & Conditions", href: "/terms" },
       { label: "Disclaimer", href: "/disclaimer" },
       { label: "Refund Policy", href: "/refund-policy" },
+      { label: "Presale Terms", href: "/presale-terms" },
     ],
   },
   {

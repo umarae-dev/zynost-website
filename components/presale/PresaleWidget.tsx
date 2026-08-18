@@ -45,6 +45,8 @@ export function PresaleWidget() {
   const [purchased, setPurchased] = useState<bigint | null>(null);
   const [claimed, setClaimed] = useState<bigint | null>(null);
   const [claimable, setClaimable] = useState<bigint | null>(null);
+  const [vested, setVested] = useState<bigint | null>(null);
+  const [firstPurchaseAt, setFirstPurchaseAt] = useState<bigint | null>(null);
 
   const [stage, setStage] = useState<Stage>("idle");
   const [txError, setTxError] = useState<string | null>(null);
@@ -73,15 +75,18 @@ export function PresaleWidget() {
     if (!wallet.address) return;
     const presale = new Contract(UQX_PRESALE_ADDRESS, PRESALE_ABI, readProvider);
     const token = new Contract(paymentToken.address, ERC20_ABI, readProvider);
-    const [buyerInfo, claimableAmt, balance, allowed] = await Promise.all([
+    const [buyerInfo, claimableAmt, vestedAmt, balance, allowed] = await Promise.all([
       presale.buyers(wallet.address),
       presale.claimable(wallet.address),
+      presale.vestedAmount(wallet.address),
       token.balanceOf(wallet.address),
       token.allowance(wallet.address, UQX_PRESALE_ADDRESS),
     ]);
     setPurchased(buyerInfo.totalPurchased);
     setClaimed(buyerInfo.claimed);
     setClaimable(claimableAmt);
+    setVested(vestedAmt);
+    setFirstPurchaseAt(buyerInfo.firstPurchaseAt);
     setTokenBalance(balance);
     setAllowance(allowed);
   }, [wallet.address, paymentToken.address]);
@@ -89,6 +94,14 @@ export function PresaleWidget() {
   useEffect(() => {
     if (wallet.address && wallet.isOnBsc) loadWalletData();
   }, [wallet.address, wallet.isOnBsc, loadWalletData]);
+
+  const stillLocked = purchased !== null && vested !== null ? purchased - vested : null;
+
+  const fullyUnlockedAt = useMemo(() => {
+    if (!firstPurchaseAt || firstPurchaseAt === ZERO) return null;
+    const VESTING_DURATION_SECONDS = 180 * 24 * 60 * 60;
+    return new Date((Number(firstPurchaseAt) + VESTING_DURATION_SECONDS) * 1000);
+  }, [firstPurchaseAt]);
 
   const amountWei = useMemo(() => {
     if (!amount || Number.isNaN(Number(amount))) return ZERO;
@@ -319,9 +332,33 @@ export function PresaleWidget() {
                     <p className="text-muted-foreground">Already claimed</p>
                     <p className="font-semibold">{fmt(Number(formatEther(claimed ?? ZERO)), 0)} UQX</p>
                   </div>
+                  <div>
+                    <p className="text-muted-foreground">Unlocked so far</p>
+                    <p className="font-semibold text-bullish">{fmt(Number(formatEther(vested ?? ZERO)), 2)} UQX</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Still locked</p>
+                    <p className="font-semibold">{fmt(Number(formatEther(stillLocked ?? ZERO)), 2)} UQX</p>
+                  </div>
                 </div>
+                {purchased !== null && purchased > ZERO && (
+                  <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-violet to-sky"
+                      style={{
+                        width: `${Math.min(
+                          100,
+                          Number(((vested ?? ZERO) * BigInt(10000)) / purchased) / 100,
+                        )}%`,
+                      }}
+                    />
+                  </div>
+                )}
                 <p className="mt-2 text-xs text-muted-foreground">
                   20% is liquid immediately, the rest vests linearly over 6 months from your first purchase.
+                  {fullyUnlockedAt && (
+                    <> Fully unlocks {fullyUnlockedAt.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}.</>
+                  )}
                 </p>
                 <button
                   onClick={handleClaim}

@@ -76,16 +76,20 @@ export default function PresalePage() {
           including total loss of value. Only participate with what you can afford to lose, and read
           the{" "}
           <Link href="/whitepaper" className="text-violet underline underline-offset-2">Whitepaper</Link>
-          {" "}(Section 10, Risk Factors) before buying. You are solely responsible for your own wallet
-          and recovery phrase — {SITE.name} cannot recover funds sent to the wrong address or lost
-          through a compromised wallet.
+          {" "}(Section 10, Risk Factors) and the{" "}
+          <Link href="/presale-terms" className="text-violet underline underline-offset-2">Presale Terms &amp; Conditions</Link>
+          {" "}before buying. You are solely responsible for your own wallet and recovery phrase —{" "}
+          {SITE.name} cannot recover funds sent to the wrong address or lost through a compromised
+          wallet.
         </p>
       </Reveal>
 
-      <Reveal delay={0.16} className="mt-10 flex justify-center gap-4 text-sm">
+      <Reveal delay={0.16} className="mt-10 flex flex-wrap justify-center gap-4 text-sm">
         <Link href="/tokenomics" className="text-violet underline underline-offset-2">Full Tokenomics</Link>
         <span className="text-border">·</span>
         <Link href="/whitepaper" className="text-violet underline underline-offset-2">Whitepaper</Link>
+        <span className="text-border">·</span>
+        <Link href="/presale-terms" className="text-violet underline underline-offset-2">Presale Terms</Link>
       </Reveal>
     </div>
   );
