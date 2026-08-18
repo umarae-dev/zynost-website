@@ -57,8 +57,8 @@ export default function TeamPage() {
           The people building {SITE.name}.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Real people, not an anonymous project. Every product across the ecosystem, from{" "}
-          {SITE.name} to Zynost Pay to UQX, is built and run by the people below.
+          One team, three products — {SITE.name}, Zynost Pay, and UQX — built and run end to end
+          by the people below.
         </p>
       </Reveal>
 
@@ -82,7 +82,7 @@ export default function TeamPage() {
 
 function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-7 transition-colors hover:border-violet/40">
+    <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-violet/40 hover:shadow-[0_20px_40px_-20px_rgba(139,92,246,0.4)]">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-violet/10 blur-2xl transition-opacity duration-300 group-hover:opacity-80"
@@ -96,7 +96,7 @@ function TeamCard({ member }: { member: TeamMember }) {
                 alt={member.name}
                 width={96}
                 height={96}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-125"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-violet/20 to-sky/20 text-lg font-bold text-violet">
