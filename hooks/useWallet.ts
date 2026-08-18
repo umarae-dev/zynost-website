@@ -5,7 +5,9 @@ import { BrowserProvider } from "ethers";
 import { BSC_CHAIN_ID, BSC_CHAIN_ID_HEX, BSC_CHAIN_PARAMS } from "@/lib/web3/presaleConfig";
 
 type EthereumProvider = {
-  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+  // EIP-1193 allows params to be a positional array OR a single object,
+  // depending on the RPC method (wallet_watchAsset uses the object form).
+  request: (args: { method: string; params?: unknown[] | Record<string, unknown> }) => Promise<unknown>;
   on: (event: string, handler: (...args: unknown[]) => void) => void;
   removeListener: (event: string, handler: (...args: unknown[]) => void) => void;
 };

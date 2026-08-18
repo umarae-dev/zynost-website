@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Contract, JsonRpcProvider, formatEther, parseEther, MaxUint256 } from "ethers";
 import { motion, AnimatePresence } from "framer-motion";
-import { Wallet, ArrowRight, CheckCircle2, Loader2, AlertTriangle, Clock } from "lucide-react";
+import { Wallet, ArrowRight, CheckCircle2, Loader2, AlertTriangle, Clock, PlusCircle } from "lucide-react";
 import { useWallet } from "@/hooks/useWallet";
 import {
+  UQX_TOKEN_ADDRESS,
   UQX_PRESALE_ADDRESS,
   PAYMENT_TOKENS,
   PRESALE_ABI,
@@ -161,6 +162,28 @@ export function PresaleWidget() {
     }
   }
 
+  // EIP-747 — prompts the wallet itself to add UQX with our logo, no
+  // external asset-repo approval needed for this to work immediately.
+  async function handleAddToMetaMask() {
+    if (!window.ethereum) return;
+    try {
+      await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: UQX_TOKEN_ADDRESS,
+            symbol: "UQX",
+            decimals: 18,
+            image: "https://zynost.com/token/uqx-logo.png",
+          },
+        },
+      });
+    } catch {
+      // User dismissed the wallet prompt — nothing to surface as an error.
+    }
+  }
+
   async function handleClaim() {
     setTxError(null);
     setTxSuccess(null);
@@ -238,6 +261,13 @@ export function PresaleWidget() {
               <span>Connected</span>
               <span className="font-mono">{wallet.address.slice(0, 6)}…{wallet.address.slice(-4)}</span>
             </div>
+
+            <button
+              onClick={handleAddToMetaMask}
+              className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors hover:border-violet/40 hover:text-violet"
+            >
+              <PlusCircle size={13} /> Add UQX to wallet
+            </button>
 
             {/* Payment token selector */}
             <div className="flex gap-2">
