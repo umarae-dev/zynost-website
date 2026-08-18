@@ -5,11 +5,14 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SubscribeForm } from "@/components/shared/SubscribeForm";
-import { XLogo } from "@/components/shared/SocialIcons";
-import { SITE } from "@/lib/constants";
+import { XLogo, YouTubeLogo, TikTokLogo, DiscordLogo } from "@/components/shared/SocialIcons";
+import { SITE, SOCIAL_LINKS } from "@/lib/constants";
 
 const SOCIALS = [
-  { label: "X (Twitter)", href: `https://x.com/${SITE.twitter.replace("@", "")}`, Icon: XLogo },
+  { label: "X (Twitter)", href: SOCIAL_LINKS.x, Icon: XLogo },
+  { label: "YouTube", href: SOCIAL_LINKS.youtube, Icon: YouTubeLogo },
+  { label: "TikTok", href: SOCIAL_LINKS.tiktok, Icon: TikTokLogo },
+  { label: "Discord", href: SOCIAL_LINKS.discord, Icon: DiscordLogo },
 ];
 
 const FOOTER_COLUMNS = [

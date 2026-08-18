@@ -2,7 +2,7 @@ export const SITE = {
   name: "Zynost",
   tagline: "Decision Intelligence, Not Signals.",
   description:
-    "Zynost combines an 18-agent crypto intelligence system with live market data, a Skeptic review, a final Judge verdict, and structured trade planning — so every decision comes with evidence, risks, and clear next steps.",
+    "Zynost combines a 17-agent crypto intelligence system, deterministic Institutional Lenses, FlowState regime monitoring, and Market Twin historical analogues into one evidence-grounded Decision Brief — generated in your own language, with the reasoning always visible.",
   url: "https://zynost.com",
   appUrl: "https://app.zynost.com",
   twitter: "@zynost",
@@ -19,6 +19,15 @@ export const NAV_LINKS = [
 // domain) — this is deliberately just a link out, not a page of its own
 // here, so the two products never get tangled together.
 export const ZYNOST_PAY_URL = "https://pay.zynost.com";
+
+// Same 4 accounts, same links, on both Zynost and Zynost Pay — one shared
+// ecosystem presence rather than per-product socials.
+export const SOCIAL_LINKS = {
+  x: "https://x.com/Zynost",
+  youtube: "https://www.youtube.com/@zynost-uqx",
+  tiktok: "https://www.tiktok.com/@zynostuqx",
+  discord: "https://discord.gg/qdf3hBTDE",
+};
 
 export type Agent = {
   tier: 1 | 2 | 3 | 4;
@@ -44,15 +53,59 @@ export const AGENTS: Agent[] = [
   { tier: 3, name: "Trading Psychology", role: "Behavioral patterns", description: "Surfaces real behavioral patterns — revenge trading, FOMO entries — from your history." },
   { tier: 1, name: "Learning", role: "Q&A & glossary", description: "Explains any term or concept in plain language, on demand." },
   { tier: 3, name: "Trade Plan", role: "Entry, stop & targets", description: "Turns calculated entry, stop-loss, and target prices into a plain-language trade setup." },
-  { tier: 4, name: "Skeptic", role: "Finds the holes", description: "Actively hunts for contradictions in the bullish case before you ever see a verdict." },
-  { tier: 4, name: "Judge", role: "Final verdict", description: "Weighs every agent's evidence and delivers one clear, reasoned decision." },
+  { tier: 4, name: "Decision Brief", role: "Evidence-grounded synthesis", description: "Hunts for contradictions, weighs every signal, and writes one clear bull case, bear case, and verdict — in your own language." },
 ];
 
 export const STATS = [
-  { value: 18, suffix: "", label: "Specialist AI agents" },
+  { value: 17, suffix: "", label: "Specialist AI agents" },
   { value: 14, suffix: "", label: "Exchanges checked" },
   { value: 8098, suffix: "", label: "Coin catalog" },
   { value: 5, suffix: "", label: "Free real-time signals" },
+];
+
+export type IntelligenceLayer = {
+  icon: string;
+  title: string;
+  status: string;
+  description: string;
+  visual: {
+    colorMode: "molten" | "ember" | "frost";
+    color1: string;
+    color2: string;
+    color3: string;
+  };
+};
+
+// The deterministic layers behind a Full Scan — real math, not an AI
+// call, computed before Decision Brief ever runs (see
+// tradeos-backend/app/services/institutional_intelligence.py,
+// market_twin_service.py, evidence_service.py). Market Twin's scope note is
+// load-bearing: it's genuinely only calibrated for BTC/ETH today (verified
+// against 7,600+ real historical snapshots per coin going back to May
+// 2023) — every other coin honestly reports "collecting history" rather
+// than faking a match, and the copy below says so rather than overselling.
+export const INTELLIGENCE_LAYERS: IntelligenceLayer[] = [
+  {
+    icon: "Landmark",
+    title: "Institutional Lenses",
+    status: "5 lenses, every scan",
+    description: "Options risk surface, leverage-crowding radar, absorption/exhaustion monitor, institutional positioning, and cross-market divergence — each one reports honestly when its underlying data isn't reliable enough to trust, instead of guessing.",
+    visual: { colorMode: "molten", color1: "#2E1065", color2: "#8B5CF6", color3: "#E9D5FF" },
+  },
+  {
+    icon: "Activity",
+    title: "FlowState",
+    status: "5-dimension regime score",
+    description: "Fresh capital, leverage reliance, holder pressure, execution quality, and supply shock combine into one real-time liquidity/regime read — computed from order books, funding, and holder concentration, not sentiment.",
+    visual: { colorMode: "frost", color1: "#082F49", color2: "#38BDF8", color3: "#E0F2FE" },
+  },
+  {
+    icon: "History",
+    title: "Market Twin",
+    status: "Live for BTC & ETH, expanding",
+    description: "Matches the current market regime against thousands of real historical point-in-time analogues (7,600+ snapshots per coin since May 2023) and reports the actual forward-outcome distribution — median return, adverse/favorable excursion, sample size. Every other coin honestly shows 'collecting history' instead of a fabricated pattern.",
+    visual: { colorMode: "ember", color1: "#451A03", color2: "#F59E0B", color3: "#FEF3C7" },
+  },
 ];
 
 export const EXCHANGES = [
@@ -118,11 +171,11 @@ export const PRICING_TIERS: PricingTier[] = [
 export const FAQS = [
   {
     q: "What can I use for free?",
-    a: "Free includes unlimited real-time coin research from computed technical, structure, liquidity, smart-money, volatility, and trade-plan data. It never uses an analysis credit. Pro and Pro Plus add the narrated specialist analysis, portfolio and coaching agents, the Skeptic/Judge verdict, and premium system-picked trade features.",
+    a: "Free includes unlimited real-time coin research from computed technical, structure, liquidity, smart-money, volatility, and trade-plan data. It never uses an analysis credit. Pro and Pro Plus add the Full Scan (specialist signals, Institutional Lenses, FlowState, Market Twin), the multilingual Decision Brief, portfolio and coaching agents, and premium system-picked trade features.",
   },
   {
     q: "What makes Zynost different from signal groups?",
-    a: "Signal groups usually give you a call without an auditable reasoning chain. Zynost keeps each specialist's evidence visible, runs a dedicated Skeptic against the consensus, and separates historically backtested setups from newer signals that are still being forward-tracked.",
+    a: "Signal groups usually give you a call without an auditable reasoning chain. Zynost keeps every specialist signal and computed evidence layer visible, has the Decision Brief actively hunt for the largest contradiction to its own emerging view before committing to it, and separates historically backtested setups from newer signals that are still being forward-tracked.",
   },
   {
     q: "How does System Planned Trade work?",
@@ -131,6 +184,14 @@ export const FAQS = [
   {
     q: "Is the backtest data real?",
     a: "The published 45% win rate and +0.13R average apply specifically to the Confirmed System Planned Trade configuration: 180 days, a fixed 45-coin universe, and 201 resolved historical picks at a 2.0x RVOL gate and 1.5R target. Emerging, DEX, and order-book signals are labeled separately and forward-tracked instead of borrowing that claim.",
+  },
+  {
+    q: "What is Market Twin, and does it work for every coin?",
+    a: "Market Twin matches the current market regime against real historical point-in-time analogues and reports the actual forward-outcome distribution — median return, adverse/favorable excursion, real sample size. It's fully calibrated for BTC and ETH today (7,600+ real historical snapshots per coin, back to May 2023) and expanding to more coins over time. For anything not yet calibrated, it honestly reports 'collecting history' instead of faking a pattern match.",
+  },
+  {
+    q: "What language does the Decision Brief come in?",
+    a: "Whatever you request. Decision Brief is generated fresh in your chosen language every time — it isn't a translated template, the whole synthesis (bull case, bear case, risk gates, confirmation/invalidation conditions) is written natively in that language from the same underlying evidence.",
   },
   {
     q: "Can I use Zynost on mobile?",
