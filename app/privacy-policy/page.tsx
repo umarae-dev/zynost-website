@@ -94,6 +94,22 @@ const sections: LegalSection[] = [
             enable 2FA, we store a securely hashed authentication secret and one-way-hashed
             backup recovery codes — never in plain text.
           </li>
+          <li>
+            <strong className="text-foreground">On-chain wallet address (opt-in).</strong> UQX
+            includes an optional, non-custodial BNB Smart Chain wallet generated entirely on
+            your device. If you choose to link it (to make claiming future mining rewards
+            possible), we store only its public address — the same address anyone can already
+            see on a block explorer. Your wallet&apos;s private key and 12-word recovery phrase
+            are generated and stored only on your device, encrypted by Android&apos;s own
+            keystore, and are never transmitted to us or seen by anyone at {SITE.name}.
+          </li>
+          <li>
+            <strong className="text-foreground">Biometric authentication.</strong> If you enable
+            fingerprint/face/PIN login, that authentication happens entirely through your
+            device&apos;s own operating system (Android BiometricPrompt) — we never receive,
+            store, or have access to any biometric data. We only see whether that on-device
+            check succeeded.
+          </li>
         </ul>
       </>
     ),
